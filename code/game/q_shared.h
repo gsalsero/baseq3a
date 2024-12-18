@@ -73,6 +73,19 @@
 
 #define	QDECL
 
+//======================= macOS ARM DEFINES =====================
+#ifdef __APPLE__
+#ifdef __arm64__
+
+#define stricmp strcasecmp
+
+#define MAC_STATIC
+#define ID_INLINE inline
+#define PATH_SEP '/'
+
+#endif // __arm64__
+#endif // __APPLE__
+
 //======================= WIN32 DEFINES =================================
 
 #ifdef WIN32

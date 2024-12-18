@@ -4,7 +4,7 @@
 # GNU Make required
 #
 
-COMPILE_PLATFORM=$(shell uname | sed -e 's/_.*//' | tr '[:upper:]' '[:lower:]' | sed -e 's/\//_/g')
+COMPILE_PLATFORM=$(shell uname | tr '[:upper:]' '[:lower:]')
 COMPILE_ARCH=$(shell uname -m | sed -e 's/i.86/x86/' | sed -e 's/^arm.*/arm/')
 
 ifeq ($(COMPILE_PLATFORM),mingw32)
@@ -133,6 +133,15 @@ ifeq ($(PLATFORM),linux)
 
 endif #Linux
 
+ifeq ($(PLATFORM),darwin)
+  SHLIBEXT=dylib
+  SHLIBLDFLAGS=-dynamiclib $(LDFLAGS)
+
+  ifeq ($(COMPILE_ARCH),arm)
+    ARCH=aarch64
+  endif
+
+endif # darwin
 
 ifdef MINGW
 
